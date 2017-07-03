@@ -57,6 +57,8 @@ network.host: {{network_host}}
 # Set a custom port for HTTP:
 #
 http.port: {{http_port}}
+
+transport.tcp.port: {{transport_port}}
 #
 # For more information, see the documentation at:
 # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
