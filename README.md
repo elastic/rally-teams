@@ -3,7 +3,7 @@ rally-teams
 
 This repository contains the default teams for the Elasticsearch benchmarking tool [Rally](https://github.com/elastic/rally).
 
-Currenly it consists only of individual "cars", which describe the configuration of a single Elasticsearch node in Rally.
+Currently it consists only of individual "cars", which describe the configuration of a single Elasticsearch node in Rally.
 
 You should not need to use this repository directly, except if you want to look under the hood or create your own teams.
 
