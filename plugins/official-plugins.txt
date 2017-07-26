@@ -1,0 +1,25 @@
+analysis-icu
+analysis-kuromoji
+analysis-phonetic
+analysis-smartcn
+analysis-stempel
+analysis-ukrainian
+# excluded because they cannot work without a custom configuration but we'd need to add that in this repo.
+#discovery-azure-classic
+#discovery-ec2
+#discovery-file
+#discovery-gce
+ingest-attachment
+ingest-geoip
+ingest-user-agent
+lang-javascript
+lang-python
+mapper-attachments
+mapper-murmur3
+mapper-size
+# see discovery plugins
+#repository-azure
+#repository-gcs
+#repository-hdfs
+#repository-s3
+store-smb
