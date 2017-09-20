@@ -1,3 +1,13 @@
+########################################################################
+#
+# This config file is used for older versions of Rally (before 0.7.3)
+#
+# It contains all plugins that are part of Elasticsearch core. However,
+# we exclude plugins that require custom configuration here as they
+# could not be used out of the box.
+#
+#
+########################################################################
 analysis-icu
 analysis-kuromoji
 analysis-phonetic
