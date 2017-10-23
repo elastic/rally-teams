@@ -29,12 +29,13 @@ logger:
   index.search.slowlog: TRACE, index_search_slow_log_file
   index.indexing.slowlog: TRACE, index_indexing_slow_log_file
 
-  index.engine.lucene.iw: TRACE
+  index.engine.lucene.iw: TRACE, file
 
 additivity:
   index.search.slowlog: false
   index.indexing.slowlog: false
   deprecation: false
+  index.engine.lucene.iw: false
 
 appender:
   console:
