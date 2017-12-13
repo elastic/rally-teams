@@ -102,5 +102,5 @@ discovery.zen.minimum_master_nodes: {{ minimum_master_nodes }}
 node.max_local_storage_nodes: {{node_count_per_host}}
 
 {%- for key, value in cluster_settings.items() %}
-{{key}}: {{value}}
+{{key}}: {{value | tojson}}
 {%- endfor %}
