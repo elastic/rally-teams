@@ -79,7 +79,11 @@
 
 # specify an alternative path for heap dumps
 # ensure the directory exists and has sufficient space
+{%- if heap_dump_path is defined %}
+-XX:HeapDumpPath={{heap_dump_path}}
+{%- else %}
 #-XX:HeapDumpPath=${heap.dump.path}
+{%- endif %}
 
 ## GC logging
 
