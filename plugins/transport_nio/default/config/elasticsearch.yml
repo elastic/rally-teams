@@ -1,0 +1,1 @@
+{%- if nio_transport_enabled %}transport.type: nio-transport{%- endif %}

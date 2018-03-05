@@ -33,3 +33,4 @@ repository-gcs
 repository-hdfs
 repository-s3
 store-smb
+transport-nio
