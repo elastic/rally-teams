@@ -16,6 +16,15 @@ instances:
 """
 
 
+def resolve_binary(install_root, binary_name):
+    binary_in_old_path = os.path.join(install_root, "bin", "x-pack", binary_name)
+    binary_in_new_path = os.path.join(install_root, "bin", "elasticsearch-{}".format(binary_name))
+    if os.path.exists(binary_in_new_path):
+        return binary_in_new_path
+    else:
+        return binary_in_old_path
+
+
 def install_certificates(config_names, variables, **kwargs):
     if "security" not in config_names:
         return False
@@ -33,7 +42,7 @@ def install_certificates(config_names, variables, **kwargs):
 
     # 1. Create certificate if needed. We will prebundle the CA with Rally and generate instance certificates based on this CA.
 
-    cert_gen = os.path.join(install_root, "bin", "x-pack", "certgen")
+    cert_gen = resolve_binary(install_root, "certgen")
     cert_bundle = os.path.join(install_root, "config", "x-pack", "node-cert.zip")
 
     # ./bin/x-pack/certgen
@@ -62,7 +71,7 @@ def add_rally_user(config_names, variables, **kwargs):
         return False
     install_root = variables["install_root_path"]
     logger.info("Adding Rally user.")
-    users = os.path.join(install_root, "bin", "x-pack", "users")
+    users = resolve_binary(install_root, "users")
 
     # ./bin/x-pack/users useradd rally -p pw-rally-benchmark
     return_code = process.run_subprocess_with_logging('{users} useradd rally -p "rally-password"'.format(users=users))
