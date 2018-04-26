@@ -17,16 +17,11 @@ instances:
 
 
 def resolve_binary(install_root, binary_name):
-    binary_in_old_path = os.path.join(install_root, "bin", "x-pack", binary_name)
-    binary_in_new_path = os.path.join(install_root, "bin", "elasticsearch-{}".format(binary_name))
-    if os.path.exists(binary_in_new_path):
-        return binary_in_new_path
-    else:
-        return binary_in_old_path
+    return os.path.join(install_root, "bin", "elasticsearch-{}".format(binary_name))
 
 
 def install_certificates(config_names, variables, **kwargs):
-    if "security" not in config_names:
+    if "x_pack_security" not in config_names:
         return False
 
     node_name = variables["node_name"]
@@ -67,7 +62,7 @@ def install_certificates(config_names, variables, **kwargs):
 
 
 def add_rally_user(config_names, variables, **kwargs):
-    if "security" not in config_names:
+    if "x_pack_security" not in config_names:
         return False
     install_root = variables["install_root_path"]
     logger.info("Adding Rally user.")
