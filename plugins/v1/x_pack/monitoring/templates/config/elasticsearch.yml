@@ -1,0 +1,6 @@
+xpack.monitoring.exporters:
+  id1:
+    type: {{monitoring_type}}
+    host: ["{{monitoring_host}}:{{monitoring_port}}"]
+    {%- if monitoring_user is defined %}auth.username: {{monitoring_user}}{%- endif %}
+    {%- if monitoring_password is defined %}auth.password: {{monitoring_password}}{%- endif %}

@@ -1,0 +1,4 @@
+# Ensure that we only enable x-pack features that we actually use
+xpack.monitoring.enabled: {{xpack_monitoring_enabled|default('false')}}
+xpack.security.enabled: {{xpack_security_enabled|default('false')}}
+xpack.watcher.enabled: {{xpack_watcher_enabled|default('false')}}
