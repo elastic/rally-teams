@@ -1,0 +1,7 @@
+# Ensure all features are available for benchmarks
+xpack.license.self_generated.type: trial
+# Ensure that we only enable x-pack features that we actually use
+xpack.ml.enabled: {{xpack_ml_enabled|default('false')}}
+xpack.monitoring.enabled: {{xpack_monitoring_enabled|default('false')}}
+xpack.security.enabled: {{xpack_security_enabled|default('false')}}
+xpack.watcher.enabled: {{xpack_watcher_enabled|default('false')}}
