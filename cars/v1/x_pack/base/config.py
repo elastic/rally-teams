@@ -21,7 +21,7 @@ def resolve_binary(install_root, binary_name):
 
 
 def install_certificates(config_names, variables, **kwargs):
-    if "x_pack_security" not in config_names:
+    if "x-pack-security" not in config_names:
         return False
 
     node_name = variables["node_name"]
@@ -62,7 +62,7 @@ def install_certificates(config_names, variables, **kwargs):
 
 
 def add_rally_user(config_names, variables, **kwargs):
-    if "x_pack_security" not in config_names:
+    if "x-pack-security" not in config_names:
         return False
     install_root = variables["install_root_path"]
     logger.info("Adding Rally user.")
