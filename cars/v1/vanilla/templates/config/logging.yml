@@ -28,11 +28,13 @@ logger:
 
   index.search.slowlog: TRACE, index_search_slow_log_file
   index.indexing.slowlog: TRACE, index_indexing_slow_log_file
+  {% if verbose_iw_logging_enabled is defined and verbose_iw_logging_enabled %}index.engine.lucene.iw: TRACE, file{%- endif %}
 
 additivity:
   index.search.slowlog: false
   index.indexing.slowlog: false
   deprecation: false
+  {% if verbose_iw_logging_enabled is defined and verbose_iw_logging_enabled %}index.engine.lucene.iw: false{%- endif %}
 
 appender:
   console:
