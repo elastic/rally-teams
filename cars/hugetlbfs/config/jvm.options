@@ -1,0 +1,3 @@
+# mmap heap into hugetlbfs (linux)
+# see: https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt
+-XX:+UseHugeTLBFS

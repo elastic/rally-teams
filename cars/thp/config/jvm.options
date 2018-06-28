@@ -1,0 +1,3 @@
+# madvise jvm to use transparent hugepages
+# see: https://www.kernel.org/doc/Documentation/vm/transhuge.txt
+-XX:+UseTransparentHugePages
