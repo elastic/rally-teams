@@ -23,4 +23,4 @@ Example:
 }
 ```   
 
-Save it as `params.json` and provide it to Rally with `-car-params="/path/to/params.json"`.
+Save it as `params.json` and provide it to Rally with `--car-params="/path/to/params.json"`.
