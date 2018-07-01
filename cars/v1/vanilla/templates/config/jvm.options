@@ -113,3 +113,10 @@
 # WARNING: This option will be removed in Elasticsearch 6.0.0 and is provided
 # only for migration purposes.
 #-Delasticsearch.json.allow_unquoted_field_names=true
+
+{# JVM settings provided by the user via the command line #}
+{%- if additional_jvm_settings is defined %}
+{%- for jvm_setting in additional_jvm_settings %}
+{{jvm_setting}}
+{%- endfor %}
+{%- endif %}
