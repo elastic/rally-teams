@@ -105,3 +105,10 @@
 #-XX:+UseGCLogFileRotation
 #-XX:NumberOfGCLogFiles=32
 #-XX:GCLogFileSize=128M
+
+{# JVM settings provided by the user via the command line #}
+{%- if additional_jvm_settings is defined %}
+{%- for jvm_setting in additional_jvm_settings %}
+{{jvm_setting}}
+{%- endfor %}
+{%- endif %}
