@@ -1,6 +1,13 @@
-xpack.monitoring.exporters:
-  id1:
-    type: {{monitoring_type}}
-    host: ["{{monitoring_host}}:{{monitoring_port}}"]
-    {%- if monitoring_user is defined %}auth.username: {{monitoring_user}}{%- endif %}
-    {%- if monitoring_password is defined %}auth.password: {{monitoring_password}}{%- endif %}
+xpack.monitoring.collection.enabled: true
+
+xpack.monitoring.exporters.custom:
+  type: {{monitoring_type}}
+{%- if monitoring_host is defined and monitoring_port is defined %}
+  host: ["{{monitoring_host}}:{{monitoring_port}}"]
+{%- endif %}
+{%- if monitoring_user is defined %}
+  auth.username: {{monitoring_user}}
+{%- endif %}
+{%- if monitoring_password is defined %}
+  auth.password: {{monitoring_password}}
+{%- endif %}
