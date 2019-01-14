@@ -4,6 +4,7 @@ This directory contains the Elasticsearch base configuration.
 
 This configuration allows to set the following parameters with Rally 0.10.0 using `--car-params`:
 
+* `data_paths` (default: "data" (relative to the Elasticsearch root directory)): A string specifying the Elasticsearch data path.
 * `additional_cluster_settings` (default: empty): A dictionary of key-value pairs with additional settings in `elasticsearch.yml`.
 * `additional_jvm_settings` (default: empty): A list of additional settings in `jvm.options`. Each entry in the list will end up as one line in `jvm.options`.
 
@@ -13,6 +14,7 @@ Example:
 
 ```json
 {
+  "data_paths": "/mnt/data",
   "additional_cluster_settings": {
     "indices.queries.cache.size": "5%",
     "transport.tcp.compress": true  
