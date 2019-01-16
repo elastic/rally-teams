@@ -5,9 +5,12 @@ xpack.security.authc.realms:
   file.file1:
     order: 0
 
-xpack.security.transport.ssl.enabled: true
 xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.key: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.key
+xpack.security.http.ssl.certificate: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.crt
+xpack.security.http.ssl.certificate_authorities: [ "{{install_root_path}}/config/x-pack/ca/ca.crt" ]
 
-xpack.ssl.key: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.key
-xpack.ssl.certificate: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.crt
-xpack.ssl.certificate_authorities: [ "{{install_root_path}}/config/x-pack/ca/ca.crt" ]
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.key: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.key
+xpack.security.transport.ssl.certificate: {{install_root_path}}/config/x-pack/{{node_name}}/{{node_name}}.crt
+xpack.security.transport.ssl.certificate_authorities: [ "{{install_root_path}}/config/x-pack/ca/ca.crt" ]
