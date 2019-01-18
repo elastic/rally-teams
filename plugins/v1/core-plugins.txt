@@ -20,8 +20,6 @@ discovery-ec2
 discovery-file
 discovery-gce
 ingest-attachment
-ingest-geoip
-ingest-user-agent
 lang-javascript
 lang-python
 mapper-attachments
