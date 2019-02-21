@@ -65,15 +65,15 @@ transport.tcp.port: {{transport_port}}
 #
 # --------------------------------- Discovery ----------------------------------
 #
-# Pass an initial list of hosts to perform discovery when new node is started:
+# Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
 {%- if all_node_ips %}
-discovery.zen.ping.unicast.hosts: {{ all_node_ips }}
+discovery.seed_hosts: {{ all_node_ips }}
 # Prevent split brain by specifying the initial master nodes.
 cluster.initial_master_nodes: {{ all_node_ips }}
 {%- else %}
-#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+#discovery.seed_hosts: ["host1", "host2"]
 #cluster.initial_master_nodes: ["node-name1", "node-name2"]
 {%- endif %}
 #
