@@ -1,4 +1,3 @@
-xpack.security.authc.accept_default_password: false
 xpack.security.authc.token.enabled: false
 
 xpack.security.authc.realms:
