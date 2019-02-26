@@ -1,14 +1,6 @@
 xpack.license.self_generated.type: {{license_type|default('trial')}}
 
-{%- if xpack_ml_enabled is defined %}
-xpack.ml.enabled: {{xpack_ml_enabled}}
-{%- endif %}
-{%- if xpack_monitoring_enabled is defined %}
-xpack.monitoring.enabled: {{xpack_monitoring_enabled}}
-{%- endif %}
-{%- if xpack_security_enabled is defined %}
-xpack.security.enabled: {{xpack_security_enabled}}
-{%- endif %}
-{%- if xpack_watcher_enabled is defined %}
-xpack.watcher.enabled: {{xpack_watcher_enabled}}
-{%- endif %}
+xpack.ml.enabled: {{xpack_ml_enabled|default('false')}}
+xpack.monitoring.enabled: {{xpack_monitoring_enabled|default('false')}}
+xpack.security.enabled: {{xpack_security_enabled|default('false')}}
+xpack.watcher.enabled: {{xpack_watcher_enabled|default('false')}}
