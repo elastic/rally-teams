@@ -22,7 +22,7 @@ import tempfile
 from esrally.utils import process, io
 from esrally import exceptions
 
-logger = logging.getLogger("rally.provisioner.plugin.xpack")
+LOGGER_NAME="rally.provisioner.security"
 
 # Used for automatically create a certificate for the current Rally node.
 instances_yml_template = """
@@ -34,44 +34,42 @@ instances:
 
 
 def resolve_binary(install_root, binary_name):
-    return os.path.join(install_root, "bin", "elasticsearch-{}".format(binary_name))
+    return os.path.join(install_root, "bin", binary_name)
 
 
 def install_certificates(config_names, variables, **kwargs):
     if "x-pack-security" not in config_names:
         return False
-
+    logger = logging.getLogger(LOGGER_NAME)
+    cert_binary = "elasticsearch-certutil"
     node_name = variables["node_name"]
     node_ip = variables["node_ip"]
     install_root = variables["install_root_path"]
+    bundled_ca_path = os.path.join(os.path.dirname(__file__), "ca")
     x_pack_config_path = os.path.join(install_root, "config", "x-pack")
 
-    logger.info("Installing x-pack certificates for node [%s]." % node_name)
-    # 0. Create instances.yml for the current ES node.
+    logger.info("Installing certificates for node [%s].", node_name)
     instances_yml = os.path.join(tempfile.mkdtemp(), "instances.yml")
     with open(instances_yml, "w") as f:
         f.write(instances_yml_template.format(node_name=node_name, node_ip=node_ip))
 
-    # 1. Create certificate if needed. We will prebundle the CA with Rally and generate instance certificates based on this CA.
-
-    cert_gen = resolve_binary(install_root, "certgen")
-    cert_bundle = os.path.join(install_root, "config", "x-pack", "node-cert.zip")
-
-    # ./bin/x-pack/certgen
-    #   -cert=/Users/daniel/.rally/benchmarks/distributions/elasticsearch-5.5.0/config/x-pack/ca/ca.crt
-    #   -key=/Users/daniel/.rally/benchmarks/distributions/elasticsearch-5.5.0/config/x-pack/ca/ca.key
-    #   -in=/Users/daniel/.rally/benchmarks/distributions/elasticsearch-5.5.0/config/instances.yml
-    #   -out=/Users/daniel/.rally/benchmarks/distributions/elasticsearch-5.5.0/config/x-pack/node-cert.zip
+    # Generate instance certificates based on a CA that is pre-bundled with Rally
+    certutil = resolve_binary(install_root, cert_binary)
+    cert_bundle = os.path.join(install_root, "node-cert.zip")
 
     return_code = process.run_subprocess_with_logging(
-        '{cert_gen} -cert="{config_path}/ca/ca.crt" -key="{config_path}/ca/ca.key" -in="{instances_yml}" -out="{cert_bundle}"'
-            .format(cert_gen=cert_gen, config_path=x_pack_config_path, instances_yml=instances_yml, cert_bundle=cert_bundle))
-    if return_code != 0:
-        logger.error("certgen has exited with code [%d]" % return_code)
-        raise exceptions.SystemSetupError("Could not create x-pack certificate bundle for node [%s]. Please see the log for details."
-                                          % node_name)
+        '{certutil} cert --silent --in "{instances_yml}" --out="{cert_bundle}" --ca-cert="{ca_path}/ca.crt" '
+        '--ca-key="{ca_path}/ca.key" --pass ""'.format(
+            certutil=certutil,
+            ca_path=bundled_ca_path,
+            instances_yml=instances_yml,
+            cert_bundle=cert_bundle))
 
-    # 2. Unzip /Users/daniel/.rally/benchmarks/distributions/elasticsearch-5.5.0/config/x-pack/node-cert.zip
+    if return_code != 0:
+        logger.error("%s has exited with code [%d]", cert_binary, return_code)
+        raise exceptions.SystemSetupError(
+            "Could not create certificate bundle for node [{}]. Please see the log for details.".format(node_name))
+
     io.decompress(cert_bundle, x_pack_config_path)
 
     # Success
@@ -81,20 +79,20 @@ def install_certificates(config_names, variables, **kwargs):
 def add_rally_user(config_names, variables, **kwargs):
     if "x-pack-security" not in config_names:
         return False
+    logger = logging.getLogger(LOGGER_NAME)
+    users_binary = "elasticsearch-users"
     install_root = variables["install_root_path"]
-    logger.info("Adding Rally user.")
-    users = resolve_binary(install_root, "users")
+    logger.info("Adding user 'rally'.")
+    users = resolve_binary(install_root, users_binary)
 
-    # ./bin/x-pack/users useradd rally -p pw-rally-benchmark
     return_code = process.run_subprocess_with_logging('{users} useradd rally -p "rally-password"'.format(users=users))
     if return_code != 0:
-        logger.error("users has exited with code [%d]" % return_code)
-        raise exceptions.SystemSetupError("Could not add x-pack user 'rally'. Please see the log for details.")
+        logger.error("%s has exited with code [%d]", users_binary, return_code)
+        raise exceptions.SystemSetupError("Could not add user 'rally'. Please see the log for details.")
 
-    # ./bin/x-pack/users roles rally -a superuser
     return_code = process.run_subprocess_with_logging('{users} roles rally -a superuser'.format(users=users))
     if return_code != 0:
-        logger.error("users has exited with code [%d]" % return_code)
+        logger.error("%s has exited with code [%d]", users_binary, return_code)
         raise exceptions.SystemSetupError("Could not add role 'superuser' for user 'rally'. Please see the log for details.")
 
     return True
