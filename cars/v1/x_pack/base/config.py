@@ -63,7 +63,7 @@ def install_certificates(config_names, variables, **kwargs):
             certutil=certutil,
             ca_path=bundled_ca_path,
             instances_yml=instances_yml,
-            cert_bundle=cert_bundle))
+            cert_bundle=cert_bundle), env=kwargs.get("env"))
 
     if return_code != 0:
         logger.error("%s has exited with code [%d]", cert_binary, return_code)
@@ -85,12 +85,14 @@ def add_rally_user(config_names, variables, **kwargs):
     logger.info("Adding user 'rally'.")
     users = resolve_binary(install_root, users_binary)
 
-    return_code = process.run_subprocess_with_logging('{users} useradd rally -p "rally-password"'.format(users=users))
+    return_code = process.run_subprocess_with_logging('{users} useradd rally -p "rally-password"'.format(users=users),
+                                                      env=kwargs.get("env"))
     if return_code != 0:
         logger.error("%s has exited with code [%d]", users_binary, return_code)
         raise exceptions.SystemSetupError("Could not add user 'rally'. Please see the log for details.")
 
-    return_code = process.run_subprocess_with_logging('{users} roles rally -a superuser'.format(users=users))
+    return_code = process.run_subprocess_with_logging('{users} roles rally -a superuser'.format(users=users),
+                                                      env=kwargs.get("env"))
     if return_code != 0:
         logger.error("%s has exited with code [%d]", users_binary, return_code)
         raise exceptions.SystemSetupError("Could not add role 'superuser' for user 'rally'. Please see the log for details.")
