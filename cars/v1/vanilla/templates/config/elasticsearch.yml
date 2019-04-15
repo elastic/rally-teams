@@ -73,6 +73,9 @@ discovery.zen.ping.unicast.hosts: {{ all_node_ips }}
 {%- else %}
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 {%- endif %}
+{%- if discovery_type %}
+discovery.type: {{discovery_type}}
+{%- endif %}
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
 #
