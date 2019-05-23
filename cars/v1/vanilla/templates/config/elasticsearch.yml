@@ -102,7 +102,6 @@ discovery.zen.minimum_master_nodes: {{ minimum_master_nodes }}
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
-node.max_local_storage_nodes: {{node_count_per_host}}
 
 {# cluster settings provided from the track #}
 {%- for key, value in cluster_settings.items() %}
