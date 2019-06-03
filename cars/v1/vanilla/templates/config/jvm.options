@@ -33,9 +33,17 @@
 ################################################################
 
 ## GC configuration
+{# The implicit default is to use CMS GC #}
+{%- if use_cms_gc is not defined or use_cms_gc == 'true' %}
 -XX:+UseConcMarkSweepGC
 -XX:CMSInitiatingOccupancyFraction=75
 -XX:+UseCMSInitiatingOccupancyOnly
+{%- endif %}
+
+{%- if use_g1_gc is defined and use_g1_gc == 'true' %}
+-XX:+UseG1GC
+-XX:InitiatingHeapOccupancyPercent=75
+{%- endif %}
 
 ## optimizations
 
