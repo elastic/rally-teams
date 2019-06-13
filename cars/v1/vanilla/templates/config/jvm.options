@@ -112,3 +112,10 @@
 # due to internationalization enhancements in JDK 9 Elasticsearch need to set the provider to COMPAT otherwise
 # time/date parsing will break in an incompatible way for some date patterns and locals
 9-:-Djava.locale.providers=COMPAT
+
+{# cluster settings provided by the user via the command line #}
+{%- if additional_java_settings is defined %}
+{%- for value in additional_java_settings %}
+{{value}}
+{%- endfor %}
+{%- endif %}
