@@ -114,9 +114,8 @@
 # only for migration purposes.
 #-Delasticsearch.json.allow_unquoted_field_names=true
 
-{# JVM settings provided by the user via the command line #}
-{%- if additional_jvm_settings is defined %}
-{%- for jvm_setting in additional_jvm_settings %}
-{{jvm_setting}}
+{%- if additional_java_settings is defined %}
+{%- for value in additional_java_settings %}
+{{value}}
 {%- endfor %}
 {%- endif %}
