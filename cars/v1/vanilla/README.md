@@ -6,7 +6,7 @@ This configuration allows to set the following parameters with Rally 0.10.0 usin
 
 * `data_paths` (default: "data" (relative to the Elasticsearch root directory)): A string specifying the Elasticsearch data path.
 * `additional_cluster_settings` (default: empty): A dictionary of key-value pairs with additional settings in `elasticsearch.yml`.
-* `additional_jvm_settings` (default: empty): A list of additional settings in `jvm.options`. Each entry in the list will end up as one line in `jvm.options`.
+* `additional_java_settings` (default: empty): A list of additional settings in `jvm.options`. Each entry in the list will end up as one line in `jvm.options`.
 
 It is recommended to store those settings in a JSON file that can be specified as well with `--car-params`.
 
@@ -19,7 +19,7 @@ Example:
     "indices.queries.cache.size": "5%",
     "transport.tcp.compress": true  
   },
-  "additional_jvm_settings": [
+  "additional_java_settings": [
     "-XX:+PreserveFramePointer"
   ]
 }
