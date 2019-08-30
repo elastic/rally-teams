@@ -45,6 +45,15 @@
 -XX:InitiatingHeapOccupancyPercent=75
 {%- endif %}
 
+## DNS cache policy
+# cache ttl in seconds for positive DNS lookups noting that this overrides the
+# JDK security property networkaddress.cache.ttl; set to -1 to cache forever
+-Des.networkaddress.cache.ttl=60
+# cache ttl in seconds for negative DNS lookups noting that this overrides the
+# JDK security property networkaddress.cache.negative ttl; set to -1 to cache
+# forever
+-Des.networkaddress.cache.negative.ttl=10
+
 ## optimizations
 
 # pre-touch memory pages used by the JVM during initialization
@@ -72,6 +81,7 @@
 -Dio.netty.noUnsafe=true
 -Dio.netty.noKeySetOptimization=true
 -Dio.netty.recycler.maxCapacityPerThread=0
+-Dio.netty.allocator.numDirectArenas=0
 
 # log4j 2
 -Dlog4j.shutdownHookEnabled=false
