@@ -42,7 +42,8 @@
 
 {%- if use_g1_gc is defined and use_g1_gc == 'true' %}
 -XX:+UseG1GC
--XX:InitiatingHeapOccupancyPercent=75
+-XX:InitiatingHeapOccupancyPercent=30
+-XX:G1ReservePercent=25
 {%- endif %}
 
 ## DNS cache policy
