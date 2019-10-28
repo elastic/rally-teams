@@ -71,7 +71,11 @@ transport.port: {{transport_port}}
 {%- if all_node_ips %}
 discovery.seed_hosts: {{ all_node_ips }}
 # Prevent split brain by specifying the initial master nodes.
+  {%- if all_node_names is defined %}
+cluster.initial_master_nodes: {{ all_node_names }}
+  {%- else %}
 cluster.initial_master_nodes: {{ all_node_ips }}
+  {%- endif %}
 {%- else %}
 #discovery.seed_hosts: ["host1", "host2"]
 #cluster.initial_master_nodes: ["node-name1", "node-name2"]
