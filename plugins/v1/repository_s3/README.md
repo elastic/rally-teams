@@ -11,7 +11,7 @@ This configuration allows to set the following parameters with Rally using `--pl
 
 Example:
 
-`--elasticsearch-plugins="repository-gcs" --plugin-params="aws_access_key:XXXXX,aws_aws_secret_key:YYYYY,aws_session_token:ZZZZZ"`
+`--elasticsearch-plugins="repository-s3" --plugin-params="aws_access_key:XXXXX,aws_aws_secret_key:YYYYY,aws_session_token:ZZZZZ"`
 
 The above settings can also be stored in a JSON file that can be specified as well with `--plugin-params`.
 
