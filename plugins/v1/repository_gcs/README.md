@@ -5,12 +5,14 @@ For more details on secure settings for the repository-gcs plugin please refer t
 
 This configuration allows to set the following parameters with Rally using `--plugin-params` in combination with `--elasticsearch-plugins="repository-gcs"`:
 
-* `credentials_file`: A string specifying the full path to the service account json file.
-* `client_name`: A string specifying the clientname to associate the service account file under.
+* `gcs_credentials_file`: A string specifying the full path to the service account json file.
+* `gcs_client_name`: A string specifying the clientname to associate the service account file under.
 
 Example:
 
-`--elasticsearch-plugins="repository-gcs" --plugin-params="client_name:internalgcsclient,credentials_file:/home/user/service_account.json"`
+`--elasticsearch-plugins="repository-gcs" --plugin-params="gcs_client_name:internalgcsclient,gcs_credentials_file:'/home/user/service_account.json'"`
+
+**IMPORTANT**: when provided in the inline format, the path to the credentials file needs to be enclosed in quotes.
 
 The above settings can also be stored in a JSON file that can be specified as well with `--plugin-params`.
 
@@ -18,8 +20,8 @@ Example:
 
 ```json
 {
-  "client_name": "internalgcsclient",
-  "credentials_file": "/home/user/service_account.json"
+  "gcs_client_name": "internalgcsclient",
+  "gcs_credentials_file": "/home/user/service_account.json"
 }
 ```   
 

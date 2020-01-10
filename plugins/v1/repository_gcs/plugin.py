@@ -35,7 +35,7 @@ def resolve_keystore_config(install_root):
 def create_keystore(install_root, keystore_binary, env):
     logger = logging.getLogger(LOGGER_NAME)
 
-    keystore_create_command = "{keystore} -s create".format(keystore=keystore_binary)
+    keystore_create_command = "{keystore} --silent create".format(keystore=keystore_binary)
 
     return_code = process.run_subprocess_with_logging(
         keystore_create_command,
@@ -50,12 +50,10 @@ def create_keystore(install_root, keystore_binary, env):
 
 def configure_keystore(config_names, variables, **kwargs):
     logger = logging.getLogger(LOGGER_NAME)
-    keystore_params = ["client_name", "credentials_file"]
-    client_name = variables.get("client_name")
+    keystore_params = ["gcs_client_name", "gcs_credentials_file"]
+    client_name = variables.get(keystore_params[0])
     credentials_file = variables.get(keystore_params[1])
 
-    logger.warning("%s", variables)
-    logger.warning("FOO: %s %s",client_name, credentials_file)
     if not (credentials_file and client_name):
         logger.warning("Skipping keystore configuration for repository-gcs as plugin-params %s were not supplied", keystore_params)
         return False
@@ -64,13 +62,11 @@ def configure_keystore(config_names, variables, **kwargs):
     install_root = variables["install_root_path"]
     keystore_binary = resolve_binary(install_root, keystore_binary_filename)
     env = kwargs.get("env")
-    credentials_file = variables.get("credentials_file")
-    client_name = variables.get("client_name")
 
     if resolve_keystore_config(install_root):
         create_keystore(install_root, keystore_binary, env)
 
-    keystore_command = "{keystore} -s add-file gcs.client.{client_name}.credentials_file {credentials_file}".format(
+    keystore_command = "{keystore} --silent add-file gcs.client.{client_name}.credentials_file {credentials_file}".format(
         keystore=keystore_binary,
         client_name=client_name,
         credentials_file=credentials_file)
@@ -83,7 +79,7 @@ def configure_keystore(config_names, variables, **kwargs):
     if return_code != 0:
         logger.error("%s has exited with code [%d]", keystore_command, return_code)
         raise exceptions.SystemSetupError(
-            "Could not add GCS keystore credentials. Please see the log for details.")
+            "Could not add GCS keystore secure setting. Please see the log for details.")
 
     # Success
     return True
