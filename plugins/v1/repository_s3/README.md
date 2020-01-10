@@ -5,13 +5,13 @@ For more details on secure settings for the repository-s3 plugin please refer to
 
 This configuration allows to set the following parameters with Rally using `--plugin-params` in combination with `--elasticsearch-plugins="repository-s3"`:
 
-* `aws_access_key`: A string specifying the AWS access key (mandatory)
-* `aws_secret_key`: A string specifying the AWS secret key (mandatory)
-* `aws_session_token`: A string specifying the AWS session token (optional)
+* `s3_access_key`: A string specifying the AWS access key (mandatory)
+* `s3_secret_key`: A string specifying the AWS secret key (mandatory)
+* `s3_session_token`: A string specifying the AWS session token (optional)
 
 Example:
 
-`--elasticsearch-plugins="repository-s3" --plugin-params="aws_access_key:XXXXX,aws_aws_secret_key:YYYYY,aws_session_token:ZZZZZ"`
+`--elasticsearch-plugins="repository-s3" --plugin-params="s3_access_key:XXXXX,aws_s3_secret_key:YYYYY,s3_session_token:ZZZZZ"`
 
 The above settings can also be stored in a JSON file that can be specified as well with `--plugin-params`.
 
@@ -19,9 +19,9 @@ Example:
 
 ```json
 {
-  "aws_access_key": "XXXXX",
-  "aws_secret_key": "YYYYY",
-  "aws_session_token": "ZZZZZ"
+  "s3_access_key": "XXXXX",
+  "s3_secret_key": "YYYYY",
+  "s3_session_token": "ZZZZZ"
 }
 ```   
 

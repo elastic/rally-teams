@@ -75,8 +75,8 @@ def add_property_to_keystore(keystore_binary, client_name, property_name, proper
 
 def configure_keystore(config_names, variables, **kwargs):
     logger = logging.getLogger(LOGGER_NAME)
-    # aws_session_token is optional
-    keystore_params = ["aws_access_key", "aws_secret_key", "aws_session_token"]
+    # s3_session_token is optional
+    keystore_params = ["s3_access_key", "s3_secret_key", "s3_session_token"]
     client_name = variables.get("client_name")
 
     # skip keystore configuration entirely if any of the mandatory params is missing
@@ -96,8 +96,8 @@ def configure_keystore(config_names, variables, **kwargs):
         create_keystore(install_root, keystore_binary, env)
 
     for property_name in keystore_params:
-        # the actual Elasticsearch secure settings for the s3 plugin don't contain the _aws prefix
-        es_property_name = property_name.replace("aws_", "")
+        # the actual Elasticsearch secure settings for the s3 plugin don't contain the s3_ prefix
+        es_property_name = property_name.replace("s3_", "")
         property_value = variables.get(property_name)
         # skip optional properties like session_token
         if not property_value:
