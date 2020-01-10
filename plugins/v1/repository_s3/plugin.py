@@ -92,7 +92,7 @@ def configure_keystore(config_names, variables, **kwargs):
     keystore_binary = resolve_binary(install_root, keystore_binary_filename)
     env = kwargs.get("env")
 
-    if resolve_keystore_config(install_root):
+    if not os.path.isfile(resolve_keystore_config(install_root)):
         create_keystore(install_root, keystore_binary, env)
 
     for property_name in keystore_params:
