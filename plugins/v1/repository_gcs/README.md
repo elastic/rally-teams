@@ -5,8 +5,8 @@ For more details on secure settings for the repository-gcs plugin please refer t
 
 This configuration allows to set the following parameters with Rally using `--plugin-params` in combination with `--elasticsearch-plugins="repository-gcs"`:
 
-* `gcs_credentials_file`: A string specifying the full path to the service account json file.
-* `gcs_client_name`: A string specifying the clientname to associate the service account file under.
+* `gcs_credentials_file`: A string specifying the full path to the service account json file (mandatory).
+* `gcs_client_name`: A string specifying the clientname to associate the service account file under (mandatory).
 
 Example:
 

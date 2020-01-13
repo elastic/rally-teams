@@ -58,8 +58,7 @@ def add_property_to_keystore(keystore_binary, client_name, property_name, proper
     keystore_command = "{keystore} --silent add --stdin s3.client.{client_name}.{key}".format(
         keystore=keystore_binary,
         client_name=client_name,
-        key=property_name,
-        value=property_value)
+        key=property_name)
 
     return_code = process.run_subprocess_with_logging(
         keystore_command,
@@ -77,7 +76,7 @@ def configure_keystore(config_names, variables, **kwargs):
     logger = logging.getLogger(LOGGER_NAME)
     # s3_session_token is optional
     keystore_params = ["s3_access_key", "s3_secret_key", "s3_session_token"]
-    client_name = variables.get("client_name")
+    client_name = variables.get("s3_client_name")
 
     # skip keystore configuration entirely if any of the mandatory params is missing
     if not (client_name and variables.get(keystore_params[0]) and variables.get(keystore_params[1])):
