@@ -8,7 +8,7 @@ This configuration allows to set the following parameters with Rally using `--pl
 * `s3_access_key`: A string specifying the AWS access key (mandatory).
 * `s3_secret_key`: A string specifying the AWS secret key (mandatory).
 * `s3_session_token`: A string specifying the AWS session token (optional).
-* `s3_client_name`: A string specifying the clientname to associate the above credentials with.
+* `s3_client_name`: A string specifying the clientname to associate the above credentials with (mandatory).
 
 Example:
 
