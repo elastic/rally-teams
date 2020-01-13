@@ -23,7 +23,7 @@ import subprocess
 from esrally.utils import process
 from esrally import exceptions
 
-LOGGER_NAME = "rally.provisioner.repository_s3"
+LOGGER_NAME = "esrally.provisioner.repository_s3"
 
 
 def resolve_binary(install_root, binary_name):

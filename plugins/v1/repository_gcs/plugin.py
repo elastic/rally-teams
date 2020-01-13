@@ -21,7 +21,7 @@ import os
 from esrally.utils import process
 from esrally import exceptions
 
-LOGGER_NAME = "rally.provisioner.repository_gcs"
+LOGGER_NAME = "esrally.provisioner.repository_gcs"
 
 
 def resolve_binary(install_root, binary_name):
