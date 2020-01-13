@@ -70,7 +70,7 @@ def add_property_to_keystore(keystore_binary, client_name, property_name, proper
     if return_code != 0:
         logger.error("%s has exited with code [%d]", keystore_command, return_code)
         raise exceptions.SystemSetupError(
-            "Could not add S3 keystore secure setting [%s]. Please see the log for details.".format(property_name))
+            "Could not add S3 keystore secure setting [{}]. Please see the log for details.".format(property_name))
 
 
 def configure_keystore(config_names, variables, **kwargs):
