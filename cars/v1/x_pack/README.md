@@ -1,15 +1,18 @@
 # This directory contains example configurations for x-pack:
 
-* `security`: Configures TLS for all HTTP and transport communication using self-signed certificates.
-* `monitoring`: Enables x-pack monitoring with export to the current cluster.
+* `x-pack-security`: Configures TLS for all HTTP and transport communication using self-signed certificates.
+* `x-pack-monitoring`: Enables x-pack monitoring.
+* `x-pack-ml`: Enables x-pack monitoring with export to the current cluster.
 
 The configurations have been implemented so that you can either only one of them or both together, i.e. all of the following combinations will work:
 
-* `--car-plugins="x-pack-security"`
-* `--car-plugins="x-pack-monitoring-local"`
-* `--car-plugins="x-pack-security,x-pack-monitoring-local"`
+* `--car="defaults,x-pack-security"`
+* `--car="defaults,x-pack-monitoring"`
+* `--car="defaults,x-pack-security,x-pack-monitoring"`
 
-## Configuring security user name, password, role
+## Parameters
+
+### x-pack-security
 
 The `x-pack-security` car will enable basic authentication and TLS for the HTTP and the transport layer.
 You can additionally specify the user name, password and role, via the `car-params` cli arg, using the following properties:
@@ -27,6 +30,32 @@ esrally --distribution-version=7.5.1 --car="defaults,trial-license,x-pack-securi
 ```
 
 If you are benchmarking a single node cluster, you'll also need to add `--cluster-health=yellow ` as precondition checks in Rally mandate that the cluster health has to be "green" by default but the x-pack related indices are created with a higher replica count. 
+
+### x-pack-monitoring
+
+When using the `x-pack-monitoring` car, you must specify a `local` or `http` (remote) exporter via the **mandatory** property `monitoring_type`.
+Please refer to [Elasticsearch Monitoring Settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/monitoring-settings.html) for more details.
+
+If you use `http` as `monitoring_type` you should also configure the following properties:
+
+| car-params | description |
+| --------- | ------------ |
+| monitoring_host | The host of the monitoring cluster |
+| monitoring_port | The port of the monitoring cluster |
+| monitoring_user | The user to use on the monitoring cluster |
+| monitoring_password | The password of the monitoring cluster user |
+
+### x-pack-ml
+
+The following optional properties may be specified, see [ML settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-settings.html) for more details:
+
+| car-params |
+| ---------- |
+| ml_max_open_jobs |
+| ml_max_machine_memory_percent |
+| ml_max_model_memory_limit |
+| ml_node_concurrent_job_allocations |
+
 
 **Security Note**
 
