@@ -2,13 +2,13 @@ This directory contains example configurations for x-pack:
 
 * `x-pack-security`: Configures TLS for all HTTP and transport communication using self-signed certificates.
 * `x-pack-monitoring`: Enables x-pack monitoring.
-* `x-pack-ml`: Enables x-pack monitoring with export to the current cluster.
+* `x-pack-ml`: Enables x-pack Machine Learning.
 
 The configurations have been implemented so that you can either only one of them or both together, i.e. all of the following combinations will work:
 
 * `--car="defaults,x-pack-security"`
 * `--car="defaults,x-pack-monitoring"`
-* `--car="defaults,x-pack-security,x-pack-monitoring"`
+* `--car="defaults,x-pack-security,x-pack-monitoring-local"`
 
 ## Parameters
 
@@ -33,10 +33,11 @@ If you are benchmarking a single node cluster, you'll also need to add `--cluste
 
 ### x-pack-monitoring
 
-When using the `x-pack-monitoring` car, you must specify a `local` or `http` (remote) exporter via the **mandatory** property `monitoring_type`.
+When using the `x-pack-monitoring` config base, you must specify a `local` or `http` (remote) exporter via the **mandatory** property `monitoring_type`.
+Note that there are two cars, `x-pack-monitoring-local` and `x-pack-monitoring-http` that configure the `monitoring_type` property for you.
 Please refer to [Elasticsearch Monitoring Settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/monitoring-settings.html) for more details.
 
-If you use `http` as `monitoring_type` you should also configure the following properties:
+When using `http` as `monitoring_type` you should also configure the following properties:
 
 | car-params | description |
 | --------- | ------------ |
