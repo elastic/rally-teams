@@ -81,21 +81,38 @@ def add_rally_user(config_names, variables, **kwargs):
         return False
     logger = logging.getLogger(LOGGER_NAME)
     users_binary = "elasticsearch-users"
+    user_name = variables.get("xpack_security_user_name", "rally")
+    user_password = variables.get("xpack_security_user_password", "rally-password")
+    user_role = variables.get("xpack_security_user_role", "superuser")
     install_root = variables["install_root_path"]
-    logger.info("Adding user 'rally'.")
+    logger.info("Adding user '%s'.",user_name)
     users = resolve_binary(install_root, users_binary)
 
-    return_code = process.run_subprocess_with_logging('{users} useradd rally -p "rally-password"'.format(users=users),
-                                                      env=kwargs.get("env"))
+    return_code = process.run_subprocess_with_logging(
+        '{users} useradd {user_name} -p "{user_password}"'.format(
+            users=users,
+            user_name=user_name,
+            user_password=user_password
+        ),
+        env=kwargs.get("env"))
     if return_code != 0:
         logger.error("%s has exited with code [%d]", users_binary, return_code)
-        raise exceptions.SystemSetupError("Could not add user 'rally'. Please see the log for details.")
+        raise exceptions.SystemSetupError("Could not add user '{}'. Please see the log for details.".format(user_name))
 
-    return_code = process.run_subprocess_with_logging('{users} roles rally -a superuser'.format(users=users),
-                                                      env=kwargs.get("env"))
+    return_code = process.run_subprocess_with_logging(
+        '{users} roles {user_name} -a {user_role}'.format(
+            users=users,
+            user_name=user_name,
+            user_role=user_role
+        ),
+        env=kwargs.get("env"))
     if return_code != 0:
         logger.error("%s has exited with code [%d]", users_binary, return_code)
-        raise exceptions.SystemSetupError("Could not add role 'superuser' for user 'rally'. Please see the log for details.")
+        raise exceptions.SystemSetupError(
+            "Could not add role '{user_role}' for user '{user_name}'. Please see the log for details.".format(
+                user_role=user_role,
+                user_name=user_name
+            ))
 
     return True
 
