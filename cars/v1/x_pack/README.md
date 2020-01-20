@@ -1,4 +1,4 @@
-# This directory contains example configurations for x-pack:
+This directory contains example configurations for x-pack:
 
 * `x-pack-security`: Configures TLS for all HTTP and transport communication using self-signed certificates.
 * `x-pack-monitoring`: Enables x-pack monitoring.
