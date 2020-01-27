@@ -81,7 +81,7 @@ def configure_keystore(config_names, variables, **kwargs):
     # skip keystore configuration entirely if any of the mandatory params is missing
     if not (client_name and variables.get(keystore_params[0]) and variables.get(keystore_params[1])):
         logger.warning("Skipping keystore configuration for repository-s3 as mandatory plugin-params [%s,%s,%s] were not supplied",
-                       "client_name",
+                       "s3_client_name",
                        keystore_params[0],
                        keystore_params[1])
         return False
