@@ -86,6 +86,12 @@
 #-XX:HeapDumpPath=${heap.dump.path}
 {%- endif %}
 
+# specify an alternative path for JVM fatal error logs
+{%- if log_path is defined %}
+-XX:ErrorFile={{log_path}}/hs_err_pid%p.log
+{%- else %}
+# ${error.file}
+{%- endif %}
 ## GC logging
 
 #-XX:+PrintGCDetails
