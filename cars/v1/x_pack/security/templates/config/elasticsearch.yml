@@ -3,6 +3,8 @@ xpack.security.authc.token.enabled: false
 xpack.security.authc.realms:
   file.file1:
     order: 0
+  native.native1:
+    order: 1
 
 xpack.security.http.ssl.enabled: true
 xpack.security.http.ssl.keystore.type: PKCS12
