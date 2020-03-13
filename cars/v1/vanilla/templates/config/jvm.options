@@ -46,6 +46,7 @@
 -XX:G1ReservePercent=25
 {%- endif %}
 
+## JVM temporary directory
 -Djava.io.tmpdir=${ES_TMPDIR}
 
 ## heap dumps
