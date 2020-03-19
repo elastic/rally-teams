@@ -33,8 +33,17 @@
 ################################################################
 
 ## GC configuration
-{# The implicit default is to use CMS GC #}
-{%- if use_cms_gc is not defined or use_cms_gc == 'true' %}
+{# The implicit default is to use the default GC (depending on the JDK version) #}
+{%- if use_cms_gc is not defined and use_g1_gc is not defined %}
+8-13:-XX:+UseConcMarkSweepGC
+8-13:-XX:CMSInitiatingOccupancyFraction=75
+8-13:-XX:+UseCMSInitiatingOccupancyOnly
+14-:-XX:+UseG1GC
+14-:-XX:G1ReservePercent=25
+14-:-XX:InitiatingHeapOccupancyPercent=30
+{%- endif %}
+
+{%- if use_cms_gc is defined and use_cms_gc == 'true' %}
 -XX:+UseConcMarkSweepGC
 -XX:CMSInitiatingOccupancyFraction=75
 -XX:+UseCMSInitiatingOccupancyOnly
@@ -42,8 +51,8 @@
 
 {%- if use_g1_gc is defined and use_g1_gc == 'true' %}
 -XX:+UseG1GC
--XX:InitiatingHeapOccupancyPercent=30
 -XX:G1ReservePercent=25
+-XX:InitiatingHeapOccupancyPercent=30
 {%- endif %}
 
 ## JVM temporary directory
