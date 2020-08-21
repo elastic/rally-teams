@@ -17,7 +17,6 @@
 
 import logging
 import os
-import shlex
 import subprocess
 
 from esrally.utils import process

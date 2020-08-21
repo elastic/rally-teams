@@ -3,7 +3,7 @@ For more details on secure settings for the repository-azure plugin please refer
 
 ### Parameters
 
-This configuration allows to set the following parameters with Rally using `--plugin-params` in combination with `--elasticsearch-plugins="repository-azure"`:
+This plugin allows to set the following parameters with Rally using `--plugin-params` in combination with `--elasticsearch-plugins="repository-azure"`:
 
 * `azure_client_name`: A string specifying the clientname to associate the above credentials with (mandatory).
 * `azure_account`: A string specifying the Azure account name (mandatory).
@@ -13,7 +13,7 @@ Example:
 
 `--elasticsearch-plugins="repository-azure" --plugin-params="azure_client_name:default,azure_account:XXXXX,azure_key:YYYYY"`
 
-The above settings can also be stored in a JSON file that can be specified as well with `--plugin-params`.
+Alternatively, the above settings can also be stored in a JSON file that can be specified via `--plugin-params`.
 
 Example:
 
