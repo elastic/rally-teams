@@ -103,6 +103,10 @@ discovery.type: {{discovery_type}}
 #
 #action.destructive_requires_name: true
 
+{%- if indexing_pressure_memory_limit is defined %}
+indexing_pressure.memory.limit: {{indexing_pressure_memory_limit}}
+{%- endif %}
+
 {# cluster settings provided from the track #}
 {%- for key, value in cluster_settings.items() %}
 {{key}}: {{value | tojson}}
