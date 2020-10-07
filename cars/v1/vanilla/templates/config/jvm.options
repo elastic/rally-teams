@@ -49,8 +49,6 @@
 
 {%- if use_g1_gc is defined and use_g1_gc == 'true' %}
 -XX:+UseG1GC
--XX:G1ReservePercent=25
--XX:InitiatingHeapOccupancyPercent=30
 {%- endif %}
 
 {%- if use_parallel_gc is defined and use_parallel_gc == 'true' %}
