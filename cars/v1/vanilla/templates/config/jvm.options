@@ -39,8 +39,6 @@
 8-13:-XX:CMSInitiatingOccupancyFraction=75
 8-13:-XX:+UseCMSInitiatingOccupancyOnly
 14-:-XX:+UseG1GC
-14-:-XX:G1ReservePercent=25
-14-:-XX:InitiatingHeapOccupancyPercent=30
 {%- endif %}
 
 {%- if use_cms_gc is defined and use_cms_gc == 'true' %}
@@ -51,8 +49,6 @@
 
 {%- if use_g1_gc is defined and use_g1_gc == 'true' %}
 -XX:+UseG1GC
--XX:G1ReservePercent=25
--XX:InitiatingHeapOccupancyPercent=30
 {%- endif %}
 
 ## DNS cache policy
