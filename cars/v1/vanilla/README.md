@@ -2,7 +2,7 @@ This directory contains the Elasticsearch base configuration.
 
 ### Parameters
 
-This configuration allows to set the following parameters with Rally 0.10.0 using `--car-params`:
+This configuration allows to set the following parameters using `--car-params`:
 
 * `data_paths` (default: "data" (relative to the Elasticsearch root directory)): A string specifying the Elasticsearch data path.
 * `indexing_pressure_memory_limit` (default: not set): A percentage value defining the cluster setting [`indexing_pressure.memory.limit`](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-indexing-pressure.html).
