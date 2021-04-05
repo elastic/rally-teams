@@ -39,12 +39,13 @@ Please refer to [Elasticsearch Monitoring Settings](https://www.elastic.co/guide
 
 When using `http` as `monitoring_type` you should also configure the following properties:
 
-| car-params | description |
-| --------- | ------------ |
-| monitoring_host | The host of the monitoring cluster |
-| monitoring_port | The port of the monitoring cluster |
-| monitoring_user | The user to use on the monitoring cluster |
-| monitoring_password | The password of the monitoring cluster user |
+| car-params | description | default |
+| --------- | ------------ | ------- |
+| monitoring_scheme | The scheme of the monitoring cluster | http |
+| monitoring_host | The host of the monitoring cluster | - |
+| monitoring_port | The port of the monitoring cluster | 9200 |
+| monitoring_user | The user to use on the monitoring cluster | - |
+| monitoring_password | The password of the monitoring cluster user | - |
 
 ### x-pack-ml
 

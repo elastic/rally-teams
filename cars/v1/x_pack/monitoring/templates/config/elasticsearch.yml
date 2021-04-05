@@ -2,8 +2,8 @@ xpack.monitoring.collection.enabled: true
 
 xpack.monitoring.exporters.custom:
   type: {{monitoring_type}}
-{%- if monitoring_host is defined and monitoring_port is defined %}
-  host: ["{{monitoring_scheme|default('http')}}://{{monitoring_host}}:{{monitoring_port}}"]
+{%- if monitoring_host is defined %}
+  host: ["{{monitoring_scheme|default('http')}}://{{monitoring_host}}:{{monitoring_port|default('9200')}}"]
 {%- endif %}
 {%- if monitoring_user is defined %}
   auth.username: {{monitoring_user}}
