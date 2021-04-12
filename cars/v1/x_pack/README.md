@@ -26,7 +26,7 @@ You can additionally specify the user name, password and role, via the `car-para
 Example:
 
 ```
-esrally --distribution-version=7.5.1 --car="defaults,trial-license,x-pack-security" --car-params="xpack_security_user_name:myuser" --client-options="use_ssl:true,verify_certs:false,basic_auth_user:'myuser',basic_auth_password:'rally-password'"
+esrally race --distribution-version=7.5.1 --car="defaults,trial-license,x-pack-security" --car-params="xpack_security_user_name:myuser" --client-options="use_ssl:true,verify_certs:false,basic_auth_user:'myuser',basic_auth_password:'rally-password'"
 ```
 
 If you are benchmarking a single node cluster, you'll also need to add `--cluster-health=yellow ` as precondition checks in Rally mandate that the cluster health has to be "green" by default but the x-pack related indices are created with a higher replica count. 
