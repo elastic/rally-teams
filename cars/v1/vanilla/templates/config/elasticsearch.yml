@@ -28,9 +28,9 @@ node.name: {{node_name}}
 #
 # ----------------------------------- Paths ------------------------------------
 #
-# Path to directory where to store the data (separate multiple locations by comma):
+# Path to directory where to store the data
 #
-path.data: {{data_paths}}
+path.data: {{data_paths[0]}}
 #
 # Path to log files:
 #
