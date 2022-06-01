@@ -33,26 +33,28 @@
 ################################################################
 
 ## GC configuration
-{# The implicit default is to use the default GC (depending on the JDK version) #}
-{%- if use_cms_gc is not defined and use_g1_gc is not defined and use_parallel_gc is not defined %}
-8-13:-XX:+UseConcMarkSweepGC
-8-13:-XX:CMSInitiatingOccupancyFraction=75
-8-13:-XX:+UseCMSInitiatingOccupancyOnly
-14-:-XX:+UseG1GC
-{%- endif %}
-
 {%- if use_cms_gc is defined and use_cms_gc == 'true' %}
 -XX:+UseConcMarkSweepGC
 -XX:CMSInitiatingOccupancyFraction=75
 -XX:+UseCMSInitiatingOccupancyOnly
-{%- endif %}
 
-{%- if use_g1_gc is defined and use_g1_gc == 'true' %}
+{%- elif use_g1_gc is defined and use_g1_gc == 'true' %}
 -XX:+UseG1GC
-{%- endif %}
 
-{%- if use_parallel_gc is defined and use_parallel_gc == 'true' %}
+{%- elif use_parallel_gc is defined and use_parallel_gc == 'true' %}
 -XX:+UseParallelGC
+
+{%- elif use_zgc is defined and use_zgc == 'true' %}
+{#- ZGC is not experimental starting from JDK 17, but the option is needed to use it in earlier versions -#}
+-XX:+UnlockExperimentalVMOptions
+-XX:+UseZGC
+
+{# The implicit default is to use the default GC (depending on the JDK version) #}
+{%- else %}
+8-13:-XX:+UseConcMarkSweepGC
+8-13:-XX:CMSInitiatingOccupancyFraction=75
+8-13:-XX:+UseCMSInitiatingOccupancyOnly
+14-:-XX:+UseG1GC
 {%- endif %}
 
 ## JVM temporary directory
