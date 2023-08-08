@@ -1,3 +1,3 @@
-cluster.routing.allocation.disk.watermark.low: {{watermark_low|default("500mb")}}
-cluster.routing.allocation.disk.watermark.high: {{watermark_high|default("300mb")}}
-cluster.routing.allocation.disk.watermark.flood_stage: {{watermark_flood_stage|default("100mb")}}
+cluster.routing.allocation.disk.watermark.low: {{watermark_low}}
+cluster.routing.allocation.disk.watermark.high: {{watermark_high}}
+cluster.routing.allocation.disk.watermark.flood_stage: {{watermark_flood_stage}}
