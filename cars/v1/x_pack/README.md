@@ -3,12 +3,14 @@ This directory contains example configurations for x-pack:
 * `x-pack-security`: Configures TLS for all HTTP and transport communication using self-signed certificates.
 * `x-pack-monitoring`: Enables x-pack monitoring.
 * `x-pack-ml`: Enables x-pack Machine Learning.
+* `x-pack-apm`: Enables x-pack apm-data plugin.
 
 The configurations have been implemented so that you can either only one of them or both together, i.e. all of the following combinations will work:
 
 * `--car="defaults,x-pack-security"`
 * `--car="defaults,x-pack-monitoring"`
 * `--car="defaults,x-pack-security,x-pack-monitoring-local"`
+* `--car="1gheap,x-pack-apm"`
 
 ## Parameters
 
@@ -67,3 +69,7 @@ The focus here is on providing a usable configuration for benchmarks. This confi
 * If you don't specify the car-params `x-pack_security_user_password` and `xpack_security_user_role`, Rally will add a "rally" user with super-user privileges with a hard-coded password.
 
 Both of these measures mean that the cluster is not any more secure than without using x-pack. But once again: The idea is to be able to measure the performance characteristics not to secure the cluster that is benchmarked.
+
+### x-pack-apm
+
+It installs index templates and ingest pipelines needed for APM Server. Note that it only works with Elasticsearch version 8.12 or later. If you observe the Node start failure when starting a race, make sure you specified the car.(not `--car="x-pack-apm"` but `--car="default,x-pack-apm` or `--car="1gheap,x-pack-apm`)
