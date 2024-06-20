@@ -33,21 +33,17 @@ def create_keystore(install_root, keystore_binary, env):
         )
 
 
-def add_property_to_keystore(
-    keystore_binary, client_name, property_name, property_value, env
-):
+def add_property_to_keystore(keystore_binary, property_name, property_value, env):
     logger = logging.getLogger(LOGGER_NAME)
 
-    p1 = subprocess.Popen(["echo", property_value], stdout=subprocess.PIPE)
+    echo_value = subprocess.Popen(["echo", property_value], stdout=subprocess.PIPE)
 
-    keystore_command = (
-        "{keystore} --silent add --stdin s3.client.{client_name}.{key}".format(
-            keystore=keystore_binary, client_name=client_name, key=property_name
-        )
+    keystore_command = "{keystore} --silent add --stdin {key}".format(
+        keystore=keystore_binary, key=property_name
     )
 
     return_code = process.run_subprocess_with_logging(
-        keystore_command, stdin=p1.stdout, env=env
+        keystore_command, stdin=echo_value.stdout, env=env
     )
 
     if return_code != 0:
@@ -79,12 +75,7 @@ def configure_keystore(config_names, variables, **kwargs):
     if not os.path.isfile(resolve_keystore_config(install_root)):
         create_keystore(install_root, keystore_binary, env)
 
-    es_property_name = "telemetry.secret_token"
-    # skip optional properties like session_token
-
-    add_property_to_keystore(
-        keystore_binary, client_name, es_property_name, secret_token, env
-    )
+    add_property_to_keystore(keystore_binary, "telemetry.secret_token", secret_token, env)
 
     # Success
     return True
