@@ -63,7 +63,7 @@ def configure_keystore(config_names, variables, **kwargs):
     if not secret_token:
         logger.warning(
             "Skipping keystore configuration for apm-tracing "
-            "as mandatory plugin-params [`apm_secret_token`] was not supplied",
+            "as mandatory car-params [`apm_secret_token`] was not supplied",
         )
         return False
 
