@@ -21,4 +21,4 @@ Example:
 }
 ```   
 
-Save it as `params.json` and provide it to Rally with `--car="defaults,apm_tracing" --plugin-params="/path/to/params.json"`.
+Save it as `params.json` and provide it to Rally with `--car="defaults,apm-tracing" --car-params="/path/to/params.json"`.
