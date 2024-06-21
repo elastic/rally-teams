@@ -1,4 +1,4 @@
-This directory contains the keystore configuration for the `apm-tracing` car to enabled APM Tracing.
+This directory contains the keystore configuration and configuration template for the `apm-tracing` mixin to enable APM Tracing.
 
 ## Parameters
 
