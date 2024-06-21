@@ -1,0 +1,6 @@
+
+telemetry.tracing.enabled: {{apm_tracing_enabled}}
+{% if apm_tracing_server_url -%}
+telemetry.agent.server_url: {{apm_tracing_server_url}}
+{%- endif %}
+

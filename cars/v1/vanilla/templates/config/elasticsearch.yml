@@ -124,10 +124,3 @@ xpack.license.self_generated.type: {{license_type|default('trial')}}
 xpack.ml.enabled: {{xpack_ml_enabled|default('false')}}
 xpack.security.enabled: {{xpack_security_enabled|default('false')}}
 xpack.watcher.enabled: {{xpack_watcher_enabled|default('false')}}
-
-{%- if apm_tracing_enabled is defined -%}
-telemetry.tracing.enabled: {{ apm_tracing_enabled }}
-{%- endif -%}
-{%- if apm_tracing_server_url is defined and apm_tracing_server_url -%}
-telemetry.agent.server_url: "{{ apm_tracing_server_url }}"
-{%- endif -%}
