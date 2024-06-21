@@ -49,7 +49,7 @@ def add_property_to_keystore(keystore_binary, property_name, property_value, env
     if return_code != 0:
         logger.error("%s has exited with code [%d]", keystore_command, return_code)
         raise exceptions.SystemSetupError(
-            "Could not add S3 keystore secure setting [{}]. Please see the log for details.".format(
+            "Could not add APM tracing keystore secure setting [{}]. Please see the log for details.".format(
                 property_name
             )
         )
