@@ -7,6 +7,7 @@ with `--cars="defaults,apm-tracing"`:
 
 - `apm_secret_token`: A string specifying the APM Tracing secretToken in order to properly send telemetry
 - `apm_tracing_server_url`: A string specifying the APM Tracing server to send telemetry data to.
+- `apm_tracing_global_labels`: A string specifying APM agent global labels added to every trace (useful for filtering).
 
 Example:
 

@@ -3,4 +3,7 @@ telemetry.tracing.enabled: {{apm_tracing_enabled}}
 {% if apm_tracing_server_url -%}
 telemetry.agent.server_url: {{apm_tracing_server_url}}
 {%- endif %}
+{% if apm_tracing_global_labels -%}
+telemetry.agent.global_labels: {{apm_tracing_global_labels}}
+{%- endif %}
 
