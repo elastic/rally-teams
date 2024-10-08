@@ -64,6 +64,9 @@
 # result in less optimal vector performance
 20-:--add-modules=jdk.incubator.vector
 
+# Lucene 10 testing: apply MADV_NORMAL advice to enable more aggressive readahead
+-Dorg.apache.lucene.store.defaultReadAdvice=normal
+
 ## heap dumps
 
 # generate a heap dump when an allocation from the Java heap fails
