@@ -77,6 +77,8 @@ cluster.initial_master_nodes: {{ all_node_names }}
       {%- else %}
 cluster.initial_master_nodes: {{ all_node_ips }}
       {%- endif %}
+  {%- else %}
+discovery.type: single-node
   {%- endif %}
 {%- else %}
 #discovery.seed_hosts: ["host1", "host2"]
