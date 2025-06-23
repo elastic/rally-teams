@@ -68,13 +68,17 @@ transport.port: {{transport_port}}
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-{%- if all_node_ips %}
+{%- if all_node_ips|length > 4 %}
+  {%- if all_node_ips_count|default(2) > 1 %}
 discovery.seed_hosts: {{ all_node_ips }}
 # Prevent split brain by specifying the initial master nodes.
-  {%- if all_node_names is defined %}
+    {%- if all_node_names is defined %}
 cluster.initial_master_nodes: {{ all_node_names }}
-  {%- else %}
+      {%- else %}
 cluster.initial_master_nodes: {{ all_node_ips }}
+      {%- endif %}
+  {%- else %}
+discovery.type: single-node
   {%- endif %}
 {%- else %}
 #discovery.seed_hosts: ["host1", "host2"]
