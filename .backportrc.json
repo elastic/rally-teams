@@ -3,12 +3,9 @@
   "repoName": "rally-teams",
   "targetBranchChoices": [
     "9.2",
+    "9.1",
+    "9.0",
     "8.19",
-    "8.16",
-    "8.15",
-    "8.14",
-    "8.13",
-    "8.12",
   ],
   "targetPRLabels": [
     "backport"
