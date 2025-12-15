@@ -41,7 +41,7 @@ Merge conflicts need to be resolved manually. There are two ways to manually cre
 7. Request a review and merge.
 8. Repeat for other version branches. 
 
-## Use backport tool (requires node)
+## Use backport tool (requires Node.js)
 1. Go to the [Backport tool](https://github.com/sorenlouv/backport?tab=readme-ov-file#backport-cli-tool) documentation and follow the guidelines to install it in your local `rally-teams` directory. Note that you have to add your personal access secret token locally in `~/.backport/config.json` with the [specified](https://github.com/sorenlouv/backport/blob/main/docs/config-file-options.md#global-config-backportconfigjson) repository access. At the end of this step, you should be able to execute `backport` command inside rally-teams repo.
 2. cd in your local `rally-teams` repository and execute `backport --pr <merged_pr_number>`. This will open an interactive dialog where you are required to selected branches to backport to. You can only select the version branches that have merge conflicts. After selecting the branches, backport tool will mention some directory in a message `Please fix the conflicts in /home/<user>/.backport/repositories/elastic/rally-teams` and you will have to go and resolve those conflicts manually for all of the selected branches. If it is not easy to tackle multiple branches in a single sweep, repeat this procedure for each target version branch separately.
 3. After resolving the merge conflicts you can execute `backport --pr <merged_pr_number>` which this time it will be successful. PRs will be opened against the target version branches and they will be ready for approval and merge.
