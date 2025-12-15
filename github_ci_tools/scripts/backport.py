@@ -86,7 +86,7 @@ REMINDER_BODY = (
     "   - If it is intended for the current Elasticsearch release version, apply the corresponding version label.\n"
     "   - If it also supports past released versions, add those labels too.\n"
     "   - If it only targets a future version, wait until that version label exists and then add it.\n"
-    "     (Each rally-tracks version label is created during the feature freeze of a new Elasticsearch branch).\n\n"
+    "     (Each rally-teams version label is created during the feature freeze of a new Elasticsearch branch).\n\n"
     "Backporting entails: \n"
     "   1. Ensure the correct version labels exist in this PR.\n"
     "   2. Ensure backport PRs have `backport` label and are passing tests.\n"
