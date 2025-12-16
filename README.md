@@ -1,57 +1,64 @@
-rally-teams
------------
+# rally-teams
 
 This repository contains the default teams for the Elasticsearch benchmarking tool [Rally](https://github.com/elastic/rally).
 
 Currently it consists only of individual "cars", which describe the configuration of a single Elasticsearch node in Rally.
 
-You should not need to use this repository directly, except if you want to look under the hood or create your own teams.
+> [!NOTE]
+> Direct interaction with this repository is only necessary for inspecting its internals or for creating custom teams.
 
-Versioning Scheme
------------------
+# Versioning Scheme
 
 Refer to the official [Rally docs](https://esrally.readthedocs.io/en/stable/track.html#custom-track-repositories) for more details.
 
-How to Contribute
------------------
+# How to Contribute
 
-If you want to contribute a car, please ensure that it works against the master version of Elasticsearch (i.e. submit PRs against the master branch). We can then check whether it's feasible to backport the car to earlier Elasticsearch versions.
- 
-See all details in the [contributor guidelines](https://github.com/elastic/rally/blob/master/CONTRIBUTING.md).
+Contributions of new cars should be compatible with the `main` version of Elasticsearch (i.e., pull requests should be submitted against the `rally-teams` master branch). Feasibility of backporting to earlier Elasticsearch versions will be evaluated after submission.
 
-Backporting changes
--------------------
+> [!NOTE]
+> For complete details, refer to the [contributor guidelines](https://github.com/elastic/rally/blob/master/CONTRIBUTING.md).
 
-If you are a contributor with direct commit access to this repository then please backport your changes. This ensures that cars do not work only for the latest `master` version of Elasticsearch but also for older versions. Apply backports with cherry-picks. Below you can find a walkthrough:
+# Backporting changes
 
-Assume we've pushed commit `abc123` to master and want to backport it. This is a change to the `my_new_car` car. Let's check what branches are available for backporting:
+Backporting ensures compatibility of cars with both the latest main version of Elasticsearch and older versions. Periodic reminders will be issued when a backport is pending as part of the contribution process.
 
-```
-daniel@io:teams/default ‹master›$ git branch -r
-  origin/1
-  origin/2
-  origin/5
-  origin/HEAD -> origin/master
-  origin/master
-```
+To initiate backporting of a pull request, at least one `vX.Y` label must be applied.
+- Apply all labels corresponding to the current and previous Elasticsearch versions with which the pull request is expected to be compatible, selecting only from the available options.
+- If the pull request introduces functionality dependent on future Elasticsearch versions, please wait until the relevant `X.Y` version branch is created. In such cases, it is recommended to retain the `'backport pending'` label on the pull request to enable periodic notifications regarding the pending backport.
 
-We'll go backwards starting from branch `5`, then branch `2` and finally branch `1`. After applying a change, we will test whether the car works as is for an older version of Elasticsearch.
+When a `vX.Y` label is added, a new pull request is automatically created, unless merge conflicts are detected. The status of this process is reported via a comment, and if successful, a link to the newly opened pull request targeting the specified version branch is provided. This pull request will include a backport label and will require a review. Upon approval, it will be merged automatically.
 
-```
-git checkout 5
-git cherry-pick abc123
+## Merge conflicts
+Merge conflicts must be resolved manually. There are two primary methods for manually creating a backport pull request:
 
-# test the change now with an Elasticsearch 5.x distribution
-esrally race --car=my_new_car --distribution-version=5.4.3 --test-mode
+### Fork and cherry-pick
+1. Fork the rally-teams repository and clone it locally.
+2. Pull and check out the intended version branch.
+3. Create a new local branch from the selected version branch.
+4. Cherry-pick the commit from the pull request to be backported.
+5. Resolve any merge conflicts, commit the changes locally, and push to the fork.
+6. Open a pull request against the target branch and manually add the backport label.
+7. Request a review and proceed with merging.
+8. Repeat this process for additional version branches as needed.
 
-# push the change
-git push origin 5
-```
+### Use backport tool (requires Node.js)
+1. Refer to the [Backport tool](https://github.com/sorenlouv/backport?tab=readme-ov-file#backport-cli-tool) for installation instructions in the local rally-teams directory. Ensure that a personal access token is configured in `~/.backport/config.json` with the required [repository access](https://github.com/sorenlouv/backport/blob/main/docs/config-file-options.md#global-config-backportconfigjson). Upon completion, the `backport` command should be available within the rally-teams repository.
+2. Navigate to the local `rally-teams` repository and execute `backport --pr <merged_pr_number>`. This command initiates an interactive dialog for selecting branches to backport to. Only version branches with merge conflicts can be selected. After branch selection, the tool will indicate a directory (e.g., `Please fix the conflicts in /home/<user>/.backport/repositories/elastic/rally-teams`) where conflicts must be resolved manually for each selected branch. If resolving multiple branches simultaneously is not feasible, repeat the procedure for each target version branch individually.
+3. Once merge conflicts are resolved, re-execute `backport --pr <merged_pr_number>`. The process should now complete successfully, and pull requests will be opened against the target version branches, ready for review and merging.
 
-Continue the same steps now on the branches `2` and `1`.
- 
-License
--------
+> [!NOTE]
+> In the event of conflicts, git blame is a useful tool for identifying changes that must be included in a version branch prior to backporting. The history of modified files can be compared between the target backport branch and the master branch.
+
+## Final steps
+To complete the process, ensure the following:
+
+- The merged pull request includes all relevant version labels.
+- Each associated backport pull request is labeled with backport.
+- Each backport pull request is merged into the appropriate version branch.
+
+Finally, remove the `backport pending` label from your PR.
+
+# License
 
 This software is licensed under the Apache License, version 2 ("ALv2"), quoted below.
 
